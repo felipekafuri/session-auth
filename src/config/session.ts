@@ -1,4 +1,4 @@
-import {SessionOptions} from 'express-session';
+import { SessionOptions } from 'express-session';
 import { IN_PROD } from './app';
 
 

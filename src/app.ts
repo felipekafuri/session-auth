@@ -1,22 +1,28 @@
 import express from 'express';
 import { SESSION_OPTIONS } from './config';
 import session, {Store} from 'express-session';
+import registerRouter from './routes/register';
+import { notFound, serverError } from './errors';
 
-const app = express();
-app.use(express.json());
+
 
 export const createApp = (store: Store)=>{
+  const app = express();
+  app.use(express.json());
+
   app.use(
     session({
       ...SESSION_OPTIONS,
       store
     })
-  )
-  
-  app.get('/',(request, response)=>{
-    return response.json({ok:true})
-  })
+  );
 
-  return app
+  app.use(registerRouter);
+  
+  app.use(notFound);
+
+  app.use(serverError);
+  
+  return app;
 }
 

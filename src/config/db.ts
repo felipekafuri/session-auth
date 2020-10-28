@@ -1,7 +1,6 @@
 import { ConnectionOptions } from 'mongoose';
 
 const { 
-  MONGO_USERNAME='mongodb',
   MONGO_HOST='localhost',
   MONGO_PORT=27017,
   MONGO_DATABASE='auth'
