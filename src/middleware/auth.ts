@@ -7,3 +7,12 @@ export const guest = (request: Request, response: Response, next: NextFunction)=
   }
   next();
 }
+
+
+export const auth = (request: Request, response: Response, next: NextFunction) =>{
+  if(!idLoggedIn(request)){
+    return next(new Error('You are not logged in'))
+  }
+
+  next()
+}

@@ -3,6 +3,7 @@ import { SESSION_OPTIONS } from './config';
 import session, {Store} from 'express-session';
 import registerRouter from './routes/register';
 import { notFound, serverError } from './errors';
+import loginRouter from './routes/longin';
 
 
 
@@ -18,6 +19,7 @@ export const createApp = (store: Store)=>{
   );
 
   app.use(registerRouter);
+  app.use(loginRouter);
   
   app.use(notFound);
 
