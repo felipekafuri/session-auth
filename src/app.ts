@@ -2,8 +2,10 @@ import express from 'express';
 import { SESSION_OPTIONS } from './config';
 import session, {Store} from 'express-session';
 import registerRouter from './routes/register';
-import { notFound, serverError } from './errors';
+import { catchAsync, notFound, serverError } from './errors';
 import loginRouter from './routes/longin';
+import homeRouter from './routes/home';
+import { active } from './middleware/auth';
 
 
 
@@ -18,8 +20,10 @@ export const createApp = (store: Store)=>{
     })
   );
 
+  app.use(catchAsync(active))
   app.use(registerRouter);
   app.use(loginRouter);
+  app.use(homeRouter);
   
   app.use(notFound);
 

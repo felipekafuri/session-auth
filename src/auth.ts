@@ -3,6 +3,7 @@ import { SESSION_NAME } from './config';
 
 export const logIn = (request: Request,userId: string) =>{
   request.session!.userId = userId;
+  request.session!.createdAt = Date.now();
 }
 
 export const idLoggedIn = (request: Request) => {

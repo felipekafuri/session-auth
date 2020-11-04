@@ -1,22 +1,28 @@
-import { SessionOptions } from 'express-session';
-import { IN_PROD } from './app';
+import { SessionOptions } from 'express-session'
+import { IN_PROD } from './app'
 
+const ONE_HOUR = 1000 * 60 * 60
 
-const halfHour = 1000 * 60 * 30;
+const THIRTY_MINUTES = ONE_HOUR / 2
+
+const SIX_HOURS = ONE_HOUR * 6
+
 
 export const {
-    SESSION_SECRET = 'please keep this secret, mate',
-    SESSION_NAME = 'felipe',
-    SESSION_IDLE_TIMEOUT = halfHour
-} = process.env;
+  SESSION_SECRET = 'please keep this secret, mate',
+  SESSION_NAME = 'sid',
+  SESSION_IDLE_TIMEOUT = THIRTY_MINUTES
+} = process.env
 
-export const SESSION_OPTIONS ={
+export const SESSION_ABSOLUTE_TIMEOUT = Number(process.env.SESSION_ABSOLUTE_TIMEOUT || SIX_HOURS)
+
+export const SESSION_OPTIONS: SessionOptions = {
   secret: SESSION_SECRET,
   name: SESSION_NAME,
   cookie: {
     maxAge: Number(SESSION_IDLE_TIMEOUT),
     secure: IN_PROD,
-    sameSite:true,
+    sameSite: true
   },
   rolling: true,
   resave: false,
